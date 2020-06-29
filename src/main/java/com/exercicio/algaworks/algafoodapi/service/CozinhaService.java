@@ -17,7 +17,6 @@ public class CozinhaService {
     public Cozinha save(@RequestBody Cozinha cozinha) { return cozinhaRepository.save(cozinha); }
 
     public void deleteCozinha(Cozinha cozinha){
-
         cozinhaRepository.delete(cozinha);
     }
 
