@@ -35,6 +35,37 @@ public class TestController {
 
     /**
      *
+     * @param nome
+     * @param id
+     * @return Usando a queries JPQLs com o @Query
+     */
+    @GetMapping("/restaurantes/por-nome-query")
+    public List<Restaurante> consultarPorNome(String nome, Long id){
+        return restauranteRepository.consultarPorNome(nome, id );
+    }
+
+    /**
+     *
+     * @param nome
+     * @param id
+     * @return Usando a queries JPQLs no arquivo externo na pasta META-INF, orm.xml
+     *  para querys muito grandes
+     */
+    @GetMapping("/restaurantes/por-nome-arquivo-externo")
+    public List<Restaurante> consultarPorNomeJPQLArquivoExterno(String nome, Long id){
+        return restauranteRepository.consultarPorNomeArquivoExterno(nome, id );
+    }
+
+
+    @GetMapping("/restaurantes/por-taxa-frete-query-customizado")
+    public List<Restaurante> repositoryCustomizadoSDJ(String nome, BigDecimal taxaFreteInicial,
+                                                      BigDecimal taxaFreteFinal){
+        return restauranteRepository.find(nome, taxaFreteInicial,taxaFreteFinal);
+    }
+
+
+    /**
+     *
      * @param taxaInicial
      * @param taxaFinal
      * @return Lista de taxaFrete usando o Between
