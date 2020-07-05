@@ -2,6 +2,8 @@ package com.exercicio.algaworks.algafoodapi.controller;
 
 import com.exercicio.algaworks.algafoodapi.domain.model.Cozinha;
 import com.exercicio.algaworks.algafoodapi.domain.model.Restaurante;
+import com.exercicio.algaworks.algafoodapi.infrastructure.repository.spec.RestauranteComFreteGratisSpec;
+import com.exercicio.algaworks.algafoodapi.infrastructure.repository.spec.RestauranteComNomeSemelhanteSpec;
 import com.exercicio.algaworks.algafoodapi.repository.CozinhaRepository;
 import com.exercicio.algaworks.algafoodapi.repository.RestauranteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +58,41 @@ public class TestController {
         return restauranteRepository.consultarPorNomeArquivoExterno(nome, id );
     }
 
-
+    /**
+     *
+     * @param nome
+     * @param taxaFreteInicial
+     * @param taxaFreteFinal
+     * @return Query dinamica com JPQL com o repositório SDJ customizado
+     */
     @GetMapping("/restaurantes/por-taxa-frete-query-customizado")
     public List<Restaurante> repositoryCustomizadoSDJ(String nome, BigDecimal taxaFreteInicial,
                                                       BigDecimal taxaFreteFinal){
         return restauranteRepository.find(nome, taxaFreteInicial,taxaFreteFinal);
     }
+
+    /**
+     *
+     * @return Lista de restaurante feito com CriteriaQuery
+     */
+    @GetMapping("/restaurantes/por-taxa-frete-query-queryCriteria")
+    public List<Restaurante> repositoryCustomizadoComQueryCriteria(){
+        return restauranteRepository.findCriteria();
+    }
+
+    /**
+     *
+     * @return Trabalhando com Specification do Spring com SDJ
+     */
+    @GetMapping("/restaurantes/com-frete-gratis")
+    public List<Restaurante> restaurantesComFreteGratis(String nome){
+        var comFreteGratis = new RestauranteComFreteGratisSpec();
+        var comNomeSemelhante = new RestauranteComNomeSemelhanteSpec(nome);
+
+        return restauranteRepository.findAll(comFreteGratis.and(comNomeSemelhante));
+    }
+
+
 
 
     /**
