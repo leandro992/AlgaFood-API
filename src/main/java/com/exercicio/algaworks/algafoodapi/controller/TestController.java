@@ -72,6 +72,7 @@ public class TestController {
     /**
      *
      * @return Lista de restaurante feito com CriteriaQuery
+     * RestauranteRepositoryImpl
      */
     @GetMapping("/restaurantes/por-taxa-frete-query-queryCriteria")
     public List<Restaurante> repositoryCustomizadoComQueryCriteria(){
