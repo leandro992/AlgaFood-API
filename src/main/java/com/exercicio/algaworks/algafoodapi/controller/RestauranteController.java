@@ -43,7 +43,8 @@ public class RestauranteController {
     public ResponseEntity<Restaurante> update(@PathVariable Long id, @RequestBody Restaurante request){
         Optional<Restaurante> restaurante = Optional.ofNullable(restauranteService.consult(id));
         if(restaurante.isPresent()) {
-            BeanUtils.copyProperties(request, restaurante.get(), "id", "formaPagamentos");
+            BeanUtils.copyProperties(request, restaurante.get(), "id", "formaPagamentos",
+                    "endereco","dataCadastro", "produtos");
             return ResponseEntity.ok(restauranteService.save(restaurante.get()));
         }
         return  ResponseEntity.notFound().build();

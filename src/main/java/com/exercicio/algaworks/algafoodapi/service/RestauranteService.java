@@ -3,7 +3,6 @@ package com.exercicio.algaworks.algafoodapi.service;
 import com.exercicio.algaworks.algafoodapi.domain.model.Restaurante;
 import com.exercicio.algaworks.algafoodapi.repository.CozinhaRepository;
 import com.exercicio.algaworks.algafoodapi.repository.RestauranteRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
